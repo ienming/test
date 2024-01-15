@@ -12,7 +12,7 @@ import Hero1Mobile from '../assets/hero_1_mob.png';
 import Hero2 from '../assets/hero_2.png';
 import Hero2Mobile from '../assets/hero_2_mob.png';
 import SmileIcon from '../assets/icon_smile.svg';
-import TextIcon from '../assets/key_text.svg';
+import IconHeroText from "./icons/IconHeroText.vue";
 
 const heros = [
     {   
@@ -149,8 +149,8 @@ window.addEventListener('resize', ()=>{
         <div id="smileIcon" class="absolute w-6 lg:w-32 spin-3d">
             <img :src="SmileIcon" alt="">
         </div>
-        <div id="textIcon" class="absolute w-32 lg:w-fit">
-            <img :src="TextIcon" alt="">
+        <div id="textIcon" class="absolute">
+            <IconHeroText class="w-32 lg:w-fit"></IconHeroText>
         </div>
     </section>
 </template>

@@ -1,8 +1,7 @@
 <script setup>
-import { reactive } from 'vue';
 import IconLogo from './icons/IconLogo.vue';
 
-const linksDesktop = reactive([
+const linksDesktop = [
     {
         label: 'HOME',
         visible: 'desktop'
@@ -23,7 +22,7 @@ const linksDesktop = reactive([
         label: 'CONTACT',
         visible: 'desktop'
     }
-])
+]
 
 const linksMobile = [
     {
@@ -41,7 +40,8 @@ const linksMobile = [
         </div>
         <section class="fz-body-small">
             <div class="hidden lg:flex gap-16">
-                <a href="" v-for="link of linksDesktop"
+                <a href="" v-for="(link, idx) of linksDesktop"
+                :class="idx === 0 ? 'active':''"
                 class="underline studio-link">{{ link.label }}</a>
             </div>
             <a href="" v-for="link of linksMobile"
@@ -71,7 +71,8 @@ const linksMobile = [
     }
 }
 
-.studio-link:hover::before{
+.studio-link:hover::before,
+.studio-link.active::before{
     opacity: 1;
     top: 50%;
 }

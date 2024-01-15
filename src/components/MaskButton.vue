@@ -15,21 +15,22 @@ const text = ref("EXPLORE MORE")
 
 <style scoped>
 button{
-    background-image: url('/public/button_subtract.svg');
+    background-image: url('/button_subtract.svg');
 }
 span {
     transform: translateX(0);
     animation: marquee 2.3s linear infinite;
-    &::before{
-        content: attr(data-content);
-        display: block;
-        position: absolute;
-        top: 0;
-        transform: translateX(calc(-130% - 0.6em));
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+}
+
+span::before{
+    content: attr(data-content);
+    display: block;
+    position: absolute;
+    top: 0;
+    transform: translateX(calc(-130% - 0.6em));
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes marquee {

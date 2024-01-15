@@ -53,7 +53,7 @@ scene.add(spotLight);
 // Load a glTF resource
 const loader = new GLTFLoader()
 let mesh
-loader.load('/public/ring.glb', (gltf) => {
+loader.load('/ring.glb', (gltf) => {
     mesh = gltf.scene;
     // console.log(mesh)
 
