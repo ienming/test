@@ -1,0 +1,24 @@
+.card {
+    border: 1px solid #000;
+}
+
+@layer base {
+    html {
+      font-family: "Helvetica", system-ui, sans-serif;
+    }
+  }
+
+@layer components{
+    .h1{
+        @apply text-5xl lg:text-9xl font-serif;
+    }
+    .h2{
+        @apply text-4xl lg:text-8xl font-sans;
+    }
+    .h3{
+        @apply text-4xl lg:text-6xl font-sans;
+    }
+    .h4{
+        @apply text-3xl lg:text-7xl font-serif;
+    }
+}
