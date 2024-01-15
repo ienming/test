@@ -5,20 +5,27 @@
 @layer base {
     html {
       font-family: "Helvetica", system-ui, sans-serif;
+      @apply text-lg lg:text-xl;
     }
   }
 
 @layer components{
-    .h1{
+    .fz-h1{
         @apply text-5xl lg:text-9xl font-serif;
     }
-    .h2{
+    .fz-h2{
         @apply text-4xl lg:text-8xl font-sans;
     }
-    .h3{
+    .fz-h3{
         @apply text-4xl lg:text-6xl font-sans;
     }
-    .h4{
+    .fz-h4{
         @apply text-3xl lg:text-7xl font-serif;
+    }
+    .fz-body-small{
+        @apply text-base lg:text-lg font-serif;
+    }
+    .fz-utility{
+        @apply text-sm lg:text-lg;
     }
 }
