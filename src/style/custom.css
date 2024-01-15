@@ -5,7 +5,6 @@
 @layer base {
     html {
       font-family: "Helvetica", system-ui, sans-serif;
-      @apply text-lg lg:text-xl;
     }
   }
 

@@ -11,7 +11,7 @@ import Swiper from './components/Swiper.vue';
   <main>
     <HeroSwiper></HeroSwiper>
     <MarqueeSection></MarqueeSection>
-    <section class="p-40">
+    <section class="p-4 py-8 lg:py-40 flex flex-col justify-center items-center relative">
       <Swiper></Swiper>
     </section>
     <h1 class="fz-h1">Heading 1</h1>
