@@ -61,16 +61,18 @@ const linksMobile = [
         width: var(--dot-size);
         height: var(--dot-size);
         position: absolute;
-        top: 50%;
+        top: 70%;
         left: -20px;
         transform: translateY(-50%);
         border-radius: 50%;
         background-color: white;
         opacity: 0;
+        transition: all .1s ease-in;
     }
 }
 
 .studio-link:hover::before{
     opacity: 1;
+    top: 50%;
 }
 </style>

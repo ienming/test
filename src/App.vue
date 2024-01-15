@@ -2,12 +2,14 @@
 import MaskButton from './components/MaskButton.vue';
 import StudioHeader from './components/StudioHeader.vue';
 import HeroSwiper from './components/HeroSwiper.vue';
+import MarqueeSection from './components/MarqueeSection.vue';
 </script>
 
 <template>
   <StudioHeader></StudioHeader>
   <main>
     <HeroSwiper></HeroSwiper>
+    <MarqueeSection></MarqueeSection>
     <h1 class="fz-h1">Heading 1</h1>
     <h2 class="fz-h2">Heading 2</h2>
     <h3 class="fz-h3">Heading 3</h3>

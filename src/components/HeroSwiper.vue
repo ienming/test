@@ -33,6 +33,26 @@ const heros = [
 ]
 
 // Controls
+// Swipte on phone
+let touchstartX = 0;
+let touchstartY = 0;
+let touchendX = 0;
+let touchendY = 0;
+
+function handleGesture(touchstartX, touchstartY, touchendX, touchendY) {
+    const delx = touchendX - touchstartX;
+    const dely = touchendY - touchstartY;
+    if(Math.abs(delx) > Math.abs(dely)){
+        if(delx > 0) {
+            // alert("right")
+            prevHero()
+        }else{
+            // alert("left")
+            nextHero()
+        }
+    }
+}
+
 function scrollBox(){
     const dom = heroScrollBox.value
     gsap.to(dom, {
@@ -49,6 +69,17 @@ function scrollBox(){
 
             }
         })
+}
+
+function initHero(){
+    const herosDom = heroScrollBox.value.children
+    const arr = Array.from(herosDom)
+    for (let i=0; i<arr.length; i++){
+        console.log(arr[i].offsetLeft)
+        heros[i]['left'] = arr[i].offsetLeft
+        heros[i]['width'] = arr[i].clientWidth
+    }
+    scrollBox()
 }
 
 function nextHero(){
@@ -72,24 +103,32 @@ function prevHero(){
 
 // 
 const activeHero = ref(1);
-const heroScrollBox = ref();
-console.log(heroScrollBox);
+const heroScrollBox = ref(null);
+const heroBox = ref(null);
 onMounted(()=>{
     nextTick(()=>{
-        const herosDom = heroScrollBox.value.children
-        const arr = Array.from(herosDom)
-        for (let i=0; i<arr.length; i++){
-            console.log(arr[i].offsetLeft)
-            heros[i]['left'] = arr[i].offsetLeft
-            heros[i]['width'] = arr[i].clientWidth
-        }
+        initHero()
+
+        const gestureZone = heroBox.value
+        gestureZone.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+        }, false);
+        gestureZone.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+            handleGesture(touchstartX, touchstartY, touchendX, touchendY)
+        }, false); 
     })
-    scrollBox()
+})
+
+window.addEventListener('resize', ()=>{
+    initHero()
 })
 </script>
 
 <template>
-    <section class="relative py-4 outer">
+    <section class="relative py-4 outer" ref="heroBox">
         <!-- now hero: {{ activeHero }} -->
         <section class="overflow-hidden">
             <div class="flex items-center" ref="heroScrollBox"
