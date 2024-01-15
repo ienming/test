@@ -1,9 +1,6 @@
 <script setup>
 import { nextTick, onMounted, ref } from "vue";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger) 
-console.log(gsap)
 
 // Images
 import PrevIcon from '../assets/icon_prev.svg';
@@ -14,6 +11,8 @@ import Hero1 from '../assets/hero_1.png';
 import Hero1Mobile from '../assets/hero_1_mob.png';
 import Hero2 from '../assets/hero_2.png';
 import Hero2Mobile from '../assets/hero_2_mob.png';
+import SmileIcon from '../assets/icon_smile.svg';
+import TextIcon from '../assets/key_text.svg';
 
 const heros = [
     {   
@@ -33,50 +32,138 @@ const heros = [
     }
 ]
 
+// Controls
+function scrollBox(){
+    const dom = heroScrollBox.value
+    gsap.to(dom, {
+            x: ()=>{
+                if (activeHero.value === 0){
+                    return (heros[activeHero.value].left)*-1
+                }else if (activeHero.value === heros.length - 1){
+                    let gap = window.innerWidth - heros[activeHero.value].width
+                    return (heros[activeHero.value].left)*-1+gap
+                }else{
+                    let gap = (window.innerWidth - heros[activeHero.value].width)/2
+                    return (heros[activeHero.value].left)*-1+gap
+                }
+
+            }
+        })
+}
+
+function nextHero(){
+    if (activeHero.value + 1 < heros.length){
+        activeHero.value += 1
+    }else{
+        activeHero.value = 0
+    }
+    scrollBox()
+}
+
+function prevHero(){
+    if (activeHero.value > 0){
+        activeHero.value -= 1
+    }else{
+        activeHero.value = heros.length - 1
+    }
+    scrollBox()
+}
+
 
 // 
+const activeHero = ref(1);
 const heroScrollBox = ref();
 console.log(heroScrollBox);
 onMounted(()=>{
-    const dom = heroScrollBox.value
     nextTick(()=>{
-        const herosDom = dom.children
-        Array.from(herosDom).forEach(hero => {
-            console.log(hero.clientWidth)
-            console.log(hero.offsetLeft)
-        })
+        const herosDom = heroScrollBox.value.children
+        const arr = Array.from(herosDom)
+        for (let i=0; i<arr.length; i++){
+            console.log(arr[i].offsetLeft)
+            heros[i]['left'] = arr[i].offsetLeft
+            heros[i]['width'] = arr[i].clientWidth
+        }
     })
-    // gsap.to(dom, {
-    //     xPercent: -100
-    // })
+    scrollBox()
 })
 </script>
 
 <template>
-    <section class="relative py-4">
+    <section class="relative py-4 outer">
+        <!-- now hero: {{ activeHero }} -->
         <section class="overflow-hidden">
-            <div class="flex gap-4 items-center" ref="heroScrollBox"
+            <div class="flex items-center" ref="heroScrollBox"
             id="heroScrollBox">
-                <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0">
-                    <img :src="hero.desktop" class="hidden lg:block" alt="">
-                    <img :src="hero.mobile" class="lg:hidden" alt="">
+                <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0 opacity-50"
+                :class="{'hero-prev': idx === activeHero - 1,
+                'hero-active': idx === activeHero,
+                'hero-next': idx === activeHero + 1,}">
+                    <img :src="hero.desktop" class="hidden lg:block w-full" alt="">
+                    <img :src="hero.mobile" class="lg:hidden w-full" alt="">
                 </div>
             </div>
         </section>
-        <div class="absolute flex justify-between w-full top-1/2">
-            <img :src="PrevIcon" alt="" />
-            <img :src="NextIcon" alt="" />
+        <div class="hidden absolute lg:flex justify-between w-full top-1/2 z-10">
+            <img :src="PrevIcon" @click="prevHero" alt="" />
+            <img :src="NextIcon" @click="nextHero" alt="" />
+        </div>
+        <div id="smileIcon" class="absolute w-6 lg:w-32">
+            <img :src="SmileIcon" alt="">
+        </div>
+        <div id="textIcon" class="absolute w-32 lg:w-fit">
+            <img :src="TextIcon" alt="">
         </div>
     </section>
 </template>
 
 <style scoped>
-/* section{
-    &::before{
-        //TOOD: gradient overlap
+.hero-prev{
+    width: 80%;
+    & img{
+        perspective-origin: left;
+        transform: perspective(500px) rotateY(2deg) translateZ(-10px);
     }
-    &::after{
-        //TOOD: gradient overlap
+}
+
+.hero-active{
+    width: 90%;
+    transform: perspective(500px) translateZ(0);
+    opacity: 1;
+}
+.hero-next {
+    width: 80%;
+    & img{
+        perspective-origin: right;
+        transform: perspective(500px) rotateY(-2deg) translateZ(-10px);
     }
-} */
+}
+
+#smileIcon{
+    top: 72px;
+    right: 137px;
+}
+
+#textIcon{
+    top: 50%;
+    left: 137px;
+}
+
+@media screen and (min-width: 992px){
+    .outer{
+        &::before, &::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            display: block;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
+            z-index: 1;
+        }
+        &::after{
+            right: 0;
+            background: linear-gradient(-90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
+        }
+    }
+}
 </style>

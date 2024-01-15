@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import IconLogo from './icons/IconLogo.vue';
 
-const links = reactive([
+const linksDesktop = reactive([
     {
         label: 'HOME',
         visible: 'desktop'
@@ -22,12 +22,15 @@ const links = reactive([
     {
         label: 'CONTACT',
         visible: 'desktop'
-    },
+    }
+])
+
+const linksMobile = [
     {
         label: 'MENU',
         visible: 'mobile'
     }
-])
+]
 </script>
 
 <template>
@@ -36,10 +39,14 @@ const links = reactive([
         <div class="w-[90px]">
             <IconLogo class="w-full h-full"></IconLogo>
         </div>
-        <div class="flex gap-16 fz-body-small">
-            <a href="" v-for="link of links"
-            class="underline studio-link">{{ link.label }}</a>
-        </div>
+        <section class="fz-body-small">
+            <div class="hidden lg:flex gap-16">
+                <a href="" v-for="link of linksDesktop"
+                class="underline studio-link">{{ link.label }}</a>
+            </div>
+            <a href="" v-for="link of linksMobile"
+            class="lg:hidden underline studio-link">{{ link.label }}</a>
+        </section>
     </header>
 </template>
 
