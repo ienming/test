@@ -146,7 +146,7 @@ window.addEventListener('resize', ()=>{
             <img :src="PrevIcon" @click="prevHero" alt="" />
             <img :src="NextIcon" @click="nextHero" alt="" />
         </div>
-        <div id="smileIcon" class="absolute w-6 lg:w-32">
+        <div id="smileIcon" class="absolute w-6 lg:w-32 spin-3d">
             <img :src="SmileIcon" alt="">
         </div>
         <div id="textIcon" class="absolute w-32 lg:w-fit">

@@ -31,7 +31,8 @@ import IconWeb from './icons/iconWeb.vue';
         </div>
     </div>
     <div class="w-full pl-10 lg:pl-0">
-        <IconWeb class="w-1/4 lg:w-fit lg:absolute left-40 bottom-40"></IconWeb>
+        <IconWeb class="w-1/4 lg:w-fit lg:absolute left-40 bottom-40
+        spin-3d"></IconWeb>
     </div>
 </template>
 
