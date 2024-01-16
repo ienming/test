@@ -11,6 +11,31 @@
     }
 }
 
+.spin-2d {
+    transform-box: fill-box;
+    transform-origin: center center;
+    animation: spin2D 10s infinite linear;
+}
+
+@keyframes spin2D {
+    from {
+        transform: rotateZ(0);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
+
+.svg-line-draw {
+    animation: svgLine 4s infinite ease-in-out;
+}
+
+@keyframes svgLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 @layer base {
     html {
       font-family: "Helvetica", system-ui, sans-serif;

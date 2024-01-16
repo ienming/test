@@ -3,7 +3,12 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { nextTick, onMounted, ref } from 'vue';
+import IconLogo from './icons/IconLogo.vue';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
+// THREE
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
 camera.position.set(4, 5, 11);
@@ -25,6 +30,18 @@ onMounted(()=>{
     nextTick(()=>{
         console.log(sceneContainer.value)
         sceneContainer.value.appendChild(renderer.domElement);
+
+        const logo = sceneContainer.value.querySelector(".logo")
+        gsap.to(logo, {
+            scrollTrigger: {
+                trigger: sceneContainer.value,
+                start: "clamp(-150 top)",
+                end: "clamp(bottom bottom)",
+                scrub: 1,
+                markers: true
+            },
+            scale: 0.2
+        })
     })
 })
 
@@ -94,5 +111,9 @@ animate();
 </script>
 
 <template>
-    <section ref="sceneContainer"></section>
+    <section ref="sceneContainer" class="relative overflow-hidden">
+        <h2 class="absolute top-1/2 -translate-y-1/2 fz-h1 pointer-events-none whitespace-nowrap">
+            NATURE. ELEGANT. CLASSIC. NATURE. ELEGANT. CLASSIC</h2>
+        <IconLogo class="logo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
+    </section>
 </template>
