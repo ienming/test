@@ -19,7 +19,7 @@ button{
 }
 span {
     transform: translateX(0);
-    animation: marquee 2.3s linear infinite;
+    animation: marquee 5s linear infinite;
 }
 
 span::before{
