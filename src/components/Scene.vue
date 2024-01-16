@@ -16,9 +16,6 @@ camera.position.set(4, 5, 11);
 const renderer = new THREE.WebGLRenderer({
     alpha: true
 });
-
-// renderer.outputColorSpace = THREE.SRGBColorSpace;
-
 renderer.setSize(window.innerWidth, window.innerHeight*0.7);
 renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -32,16 +29,31 @@ onMounted(()=>{
         sceneContainer.value.appendChild(renderer.domElement);
 
         const logo = sceneContainer.value.querySelector(".logo")
-        gsap.to(logo, {
+        const text = sceneContainer.value.querySelector(".text")
+        let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: sceneContainer.value,
                 start: "clamp(-150 top)",
-                end: "clamp(bottom bottom)",
+                end: "+=1000",
+                pin: true,
                 scrub: 1,
-                markers: true
+                // markers: true
             },
-            scale: 0.2
         })
+        tl.add(
+            gsap.to(logo, {
+                scale: 0.2
+            })
+        ).add(
+            gsap.fromTo(text,{
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                xPercent: -50
+            }),
+            "<"
+        )
     })
 })
 
@@ -79,8 +91,6 @@ loader.load('/ring.glb', (gltf) => {
     });
     mesh.traverse((child) => {
         if (child.isMesh) {
-            //   child.castShadow = true;
-            //   child.receiveShadow = true;
             child.material = material;
         }
       });
@@ -88,7 +98,7 @@ loader.load('/ring.glb', (gltf) => {
     
     mesh.position.set(0, 1.05, -1);
 
-    const Size = 15
+    const Size = 45
     mesh.scale.set(Size, Size, Size);
 
     scene.add(mesh);
@@ -112,8 +122,10 @@ animate();
 
 <template>
     <section ref="sceneContainer" class="relative overflow-hidden">
-        <h2 class="absolute top-1/2 -translate-y-1/2 fz-h1 pointer-events-none whitespace-nowrap">
-            NATURE. ELEGANT. CLASSIC. NATURE. ELEGANT. CLASSIC</h2>
+        <h2 class="text absolute top-1/2 -translate-y-1/2 left-1/2 fz-h1 pointer-events-none whitespace-nowrap">
+            <span>NATURE. ELEGANT. CLASSIC.</span>
+            <span class="pl-72">NATURE. ELEGANT. CLASSIC.</span>
+        </h2>
         <IconLogo class="logo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
     </section>
 </template>
