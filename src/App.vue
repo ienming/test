@@ -32,7 +32,7 @@ onMounted(()=>{
 </script>
 
 <template>
-  <StudioHeader data-scroll-in="true"></StudioHeader>
+  <StudioHeader></StudioHeader>
   <main>
     <HeroSwiper data-scroll-in="true"></HeroSwiper>
     <FeatureItems></FeatureItems>

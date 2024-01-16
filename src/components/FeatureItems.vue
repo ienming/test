@@ -3,31 +3,26 @@
 import MaskButton from './MaskButton.vue';
 import IconLineH from './icons/IconLineH.vue';
 import IconLineV from './icons/IconLineV.vue';
-import Item_1_1 from '../assets/item_1_1.png';
-import Item_1_2 from '../assets/item_1_2.png';
-import Item_1_3 from '../assets/item_1_3.png';
-import Item_2_1 from '../assets/item_2_1.png';
-import Item_2_2 from '../assets/item_2_2.png';
-import Item_2_3 from '../assets/item_2_3.png';
+
+function getImgUrl(id){
+    return new URL(`../assets/item_${id}.png`, import.meta.url).href
+}
 
 const items = [
     {
-        id: "1-1",
-        src: Item_1_1,
+        id: "1_1",
         class: `col-start-4 col-span-3 row-start-2 row-span-2
         lg:col-start-7 lg:row-start-1`,
         intro: "CLASSIC JACKET"
     },
     {
-        id: "1-2",
-        src: Item_1_2,
+        id: "1_2",
         class: `col-start-1 col-span-2 row-start-3 row-span-2
         lg:col-start-4 lg:row-start-2`,
         intro: "2020 FW BLACK SUIT"
     },
     {
-        id: "1-3",
-        src: Item_1_3,
+        id: "1_3",
         class: `col-start-5 col-span-2 row-start-4 row-span-2
         lg:col-start-8 lg:row-start-3`,
         intro: "GERDERLESS PAINT"
@@ -35,7 +30,8 @@ const items = [
     // {
     //     id: "2-1",
     //     src: Item_2_1,
-    //     class: "row-start-1 col-start-3 row-span-3",
+    //     class: `col-start-4 col-span-3 row-start-2 row-span-2
+    //     lg:col-start-7 lg:row-start-1`,
     //     intro: "CLASSIC JACKET"
     // },
     // {
@@ -69,7 +65,7 @@ const items = [
         lg:col-start-10 lg:py-0 lg:self-end" data-scroll-in="true"></IconLineV>
         <div class="inline item-img" data-scroll-in="true" v-for="item of items"
         :class="item.class ? item.class : ''">
-            <img :src="item.src" alt="" />
+            <img :src="getImgUrl(item.id)" alt="" />
             <p class="mt-2 text-center lg:text-left">{{ item.intro }}</p>
         </div>
         <IconLineH class="row-start-5 col-span-3 w-40

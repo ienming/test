@@ -149,8 +149,8 @@ window.addEventListener('resize', ()=>{
         <div id="smileIcon" class="absolute w-6 lg:w-32 spin-3d">
             <img :src="SmileIcon" alt="">
         </div>
-        <div id="textIcon" class="absolute">
-            <IconHeroText class="w-32 lg:w-fit"></IconHeroText>
+        <div id="textIcon" class="absolute z-10">
+            <IconHeroText class="w-1/2 lg:w-fit"></IconHeroText>
         </div>
     </section>
 </template>
@@ -174,13 +174,13 @@ window.addEventListener('resize', ()=>{
 }
 
 #smileIcon{
-    top: 72px;
-    right: 137px;
+    top: 38px;
+    right: 47.8px;
 }
 
 #textIcon{
-    top: 50%;
-    left: 137px;
+    top: 5%;
+    left: 47px;
 }
 
 @media screen and (min-width: 992px){
@@ -199,6 +199,14 @@ window.addEventListener('resize', ()=>{
             right: 0;
             background: linear-gradient(-90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
         }
+    }
+    #textIcon{
+        top: 50%;
+        left: 137px;
+    }
+    #smileIcon{
+       top: 72px;
+        right: 137px;
     }
 }
 </style>

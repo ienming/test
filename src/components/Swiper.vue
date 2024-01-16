@@ -63,7 +63,10 @@ import IconWeb from './icons/iconWeb.vue';
 }
 
 button {
-    writing-mode: vertical-lr;
+    >span{
+
+        writing-mode: vertical-lr;
+    }
     @apply py-3 px-2 lg:py-5 lg:px-6 border border-white bg-white text-black;
     &:disabled{
         @apply bg-transparent text-white;

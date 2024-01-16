@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { nextTick, onMounted, ref } from 'vue';
+import modelPath from '../assets/ring.glb';
 import IconLogo from './icons/IconLogo.vue';
 import IconStone from '../assets/icon_stone.png';
 import { gsap } from 'gsap';
@@ -83,7 +84,7 @@ scene.add(spotLight);
 // Load a glTF resource
 const loader = new GLTFLoader()
 let mesh
-loader.load('/ring.glb', (gltf) => {
+loader.load(modelPath, (gltf) => {
     mesh = gltf.scene;
     // console.log(mesh)
 
@@ -128,8 +129,15 @@ animate();
             <span class="pl-72">NATURE. ELEGANT. CLASSIC.</span>
         </h2>
         <IconLogo class="logo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
-        <img :src="IconStone" class="spin-2d absolute left-12 lg:left-30 lg:top-20" alt="" />
-        <img :src="IconStone" class="spin-2d absolute top-12 right-20" alt="" />
-        <img :src="IconStone" class="spin-2d absolute right-48 bottom-20" alt="" />
+        <img :src="IconStone" class="spin-2d w-6 left-12 lg:left-30 lg:top-20" alt="" />
+        <img :src="IconStone" class="spin-2d w-12 top-12 right-20" alt="" />
+        <img :src="IconStone" class="spin-2d w-6 right-48 bottom-20" alt="" />
     </section>
 </template>
+
+<style scoped>
+.spin-2d{
+    pointer-events: none;
+    @apply absolute lg:w-fit;
+}
+</style>
