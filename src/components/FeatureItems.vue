@@ -56,7 +56,7 @@ const items = [
 <template>
     <section class="p-4 lg:p-16 grid">
         <div class="leading-none col-start-1 col-span-4 row-start-1
-        lg:col-span-5">
+        lg:col-span-5" data-scroll-in="true">
             <h2 class="fz-h1">SEASONAL</h2>
             <h2 class="fz-h2 flex items-center gap-2">
                 <span>FEATURED</span>
@@ -66,14 +66,14 @@ const items = [
             <MaskButton class="lg:hidden"></MaskButton>
         </div>
         <IconLineV class="col-start-6 col-span-1 py-12
-        lg:col-start-10 lg:py-0 lg:self-end"></IconLineV>
-        <div class="inline item-img" v-for="item of items"
+        lg:col-start-10 lg:py-0 lg:self-end" data-scroll-in="true"></IconLineV>
+        <div class="inline item-img" data-scroll-in="true" v-for="item of items"
         :class="item.class ? item.class : ''">
             <img :src="item.src" alt="" />
             <p class="mt-2 text-center lg:text-left">{{ item.intro }}</p>
         </div>
         <IconLineH class="row-start-5 col-span-3 w-40
-        lg:row-start-4 lg:col-start-5 lg:w-auto"></IconLineH>
+        lg:row-start-4 lg:col-start-5 lg:w-auto" data-scroll-in="true"></IconLineH>
     </section>
 </template>
 

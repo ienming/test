@@ -33,7 +33,7 @@ const linksMobile = [
 </script>
 
 <template>
-    <header class="flex justify-between w-screen py-4 px-8
+    <header id="studioHeader" class="flex justify-between w-screen py-4 px-8
     border-b border-white">
         <div class="w-[90px]">
             <IconLogo class="w-full h-full"></IconLogo>

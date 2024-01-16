@@ -14,15 +14,15 @@ gsap.registerPlugin(ScrollTrigger);
 onMounted(()=>{
   nextTick(()=>{
     const els = document.querySelectorAll('[data-scroll-in="true"]')
-    console.log(els)
+    // console.log(els)
     Array.from(els).forEach(el => {
       gsap.fromTo(el, {
         opacity: 0
       },{
         scrollTrigger: {
           trigger: el,
-          start: "clamp(-=200, top)",
-          end: "clamp(bottom, bottom)",
+          start: "clamp(-500 top)",
+          end: "clamp(bottom top)",
         },
         opacity: 1
       })

@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { nextTick, onMounted, ref } from 'vue';
 import IconLogo from './icons/IconLogo.vue';
+import IconStone from '../assets/icon_stone.png';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -127,5 +128,8 @@ animate();
             <span class="pl-72">NATURE. ELEGANT. CLASSIC.</span>
         </h2>
         <IconLogo class="logo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
+        <img :src="IconStone" class="spin-2d absolute left-12 lg:left-30 lg:top-20" alt="" />
+        <img :src="IconStone" class="spin-2d absolute top-12 right-20" alt="" />
+        <img :src="IconStone" class="spin-2d absolute right-48 bottom-20" alt="" />
     </section>
 </template>
