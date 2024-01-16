@@ -7,10 +7,10 @@ import IconWeb from './icons/iconWeb.vue';
 </script>
 
 <template>
-    <div class="text-right w-full inline-flex justify-end">
+    <div class="text-right w-full inline-flex justify-end" data-scroll-in="true">
         <IconStarText class="w-1/2 lg:w-fit lg:absolute right-40 top-40"></IconStarText>
     </div>
-    <div class="inline-block">
+    <div class="inline-block" data-scroll-in="true">
         <div class="relative z-10">
             <img :src="ImageDesktop" alt="" class="hidden lg:block lg:w-75">
             <img :src="ImageMobile" alt="" class="w-full lg:hidden">
@@ -30,7 +30,7 @@ import IconWeb from './icons/iconWeb.vue';
             </div>
         </div>
     </div>
-    <div class="w-full pl-10 lg:pl-0">
+    <div class="w-full pl-10 lg:pl-0" data-scroll-in="true">
         <IconWeb class="w-1/4 lg:w-fit lg:absolute left-40 bottom-40
         spin-3d"></IconWeb>
     </div>

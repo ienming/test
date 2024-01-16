@@ -129,11 +129,11 @@ window.addEventListener('resize', ()=>{
 
 <template>
     <section class="relative py-4 outer" ref="heroBox">
-        <!-- now hero: {{ activeHero }} -->
         <section class="overflow-hidden">
             <div class="flex items-center" ref="heroScrollBox"
             id="heroScrollBox">
-                <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0 opacity-50"
+                <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0 transition-all
+                w-10/12"
                 :class="{'hero-prev': idx === activeHero - 1,
                 'hero-active': idx === activeHero,
                 'hero-next': idx === activeHero + 1,}">
@@ -157,7 +157,6 @@ window.addEventListener('resize', ()=>{
 
 <style scoped>
 .hero-prev{
-    width: 80%;
     & img{
         perspective-origin: left;
         transform: perspective(500px) rotateY(2deg) translateZ(-10px);
@@ -165,12 +164,9 @@ window.addEventListener('resize', ()=>{
 }
 
 .hero-active{
-    width: 90%;
     transform: perspective(500px) translateZ(0);
-    opacity: 1;
 }
 .hero-next {
-    width: 80%;
     & img{
         perspective-origin: right;
         transform: perspective(500px) rotateY(-2deg) translateZ(-10px);

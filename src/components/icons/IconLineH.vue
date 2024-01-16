@@ -1,0 +1,21 @@
+<script setup>
+import { nextTick, onMounted, ref } from 'vue';
+
+const icon = ref(null)
+onMounted(()=>{
+    nextTick(()=>{
+        const els = icon.value.querySelectorAll(".svg-line-draw")
+        Array.from(els).forEach((el) => {
+            el.style['stroke-dasharray'] = el.getTotalLength()
+            el.style['stroke-dashoffset'] = el.getTotalLength()
+        })
+    })
+})
+</script>
+<template>
+    <svg width="315" height="83" viewBox="0 0 315 83" fill="none" xmlns="http://www.w3.org/2000/svg"
+    ref="icon">
+<path class="svg-line-draw" d="M0.190975 81.7523C4.45189 79.9375 139.995 30.3786 189.969 25.1645C245.569 19.3634 235.423 32.6959 188.76 47.9492C116.788 71.4756 111.527 59.5009 138.655 46.1343C181.461 25.0427 297.357 4.23237 314.508 1.19609" stroke="#7C7C7C"/>
+</svg>
+
+</template>

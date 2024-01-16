@@ -1,6 +1,8 @@
 <script setup>
 // Assets
 import MaskButton from './MaskButton.vue';
+import IconLineH from './icons/IconLineH.vue';
+import IconLineV from './icons/IconLineV.vue';
 import Item_1_1 from '../assets/item_1_1.png';
 import Item_1_2 from '../assets/item_1_2.png';
 import Item_1_3 from '../assets/item_1_3.png';
@@ -12,22 +14,22 @@ const items = [
     {
         id: "1-1",
         src: Item_1_1,
-        class: `col-start-4 row-start-2 col-span-3 row-span-2
-        lg:row-start-1`,
+        class: `col-start-4 col-span-3 row-start-2 row-span-2
+        lg:col-start-7 lg:row-start-1`,
         intro: "CLASSIC JACKET"
     },
     {
         id: "1-2",
         src: Item_1_2,
-        class: `col-start-1 row-start-3 col-span-2
-        lg:col-start-2 lg:row-start-2`,
+        class: `col-start-1 col-span-2 row-start-3 row-span-2
+        lg:col-start-4 lg:row-start-2`,
         intro: "2020 FW BLACK SUIT"
     },
     {
         id: "1-3",
         src: Item_1_3,
-        class: `col-start-5 row-start-4 col-span-2
-        lg:col-start-4 lg:row-start-3`,
+        class: `col-start-5 col-span-2 row-start-4 row-span-2
+        lg:col-start-8 lg:row-start-3`,
         intro: "GERDERLESS PAINT"
     },
     // {
@@ -52,9 +54,9 @@ const items = [
 </script>
 
 <template>
-    <!-- grid-cols-6 grid-rows-4 -->
-    <section class="p-4 grid auto-cols-max">
-        <div class="leading-none col-start-1 row-start-1 col-span-4">
+    <section class="p-4 lg:p-16 grid">
+        <div class="leading-none col-start-1 col-span-4 row-start-1
+        lg:col-span-5">
             <h2 class="fz-h1">SEASONAL</h2>
             <h2 class="fz-h2 flex items-center gap-2">
                 <span>FEATURED</span>
@@ -63,10 +65,28 @@ const items = [
             <h2 class="fz-h1">ITEMS</h2>
             <MaskButton class="lg:hidden"></MaskButton>
         </div>
+        <IconLineV class="col-start-6 col-span-1 py-12
+        lg:col-start-10 lg:py-0 lg:self-end"></IconLineV>
         <div class="inline item-img" v-for="item of items"
         :class="item.class ? item.class : ''">
             <img :src="item.src" alt="" />
-            <p class="lg:mt-2">{{ item.intro }}</p>
+            <p class="mt-2 text-center lg:text-left">{{ item.intro }}</p>
         </div>
+        <IconLineH class="row-start-5 col-span-3 w-40
+        lg:row-start-4 lg:col-start-5 lg:w-auto"></IconLineH>
     </section>
 </template>
+
+<style scoped>
+section.grid{
+    grid-gap: 20px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+
+@media screen and (min-width: 992px) {
+    section.grid{
+        grid-template-columns: repeat(10, 1fr);
+    }
+}
+</style>
