@@ -29,9 +29,44 @@ function revealOnScroll(){
     })
 }
 
+function animateTarget(target, mouseX, mouseY) {
+  const { top, left, width, height } = target.getBoundingClientRect();
+  const centerX = left + width / 2;
+  const centerY = top + height / 2;
+
+  const distX = mouseX - centerX;
+  const distY = mouseY - centerY;
+
+  const attractionRadius = Math.sqrt((width / 2) ** 2 + (height / 2) ** 2);
+
+  if (
+    Math.abs(distX) < attractionRadius &&
+    Math.abs(distY) < attractionRadius
+  ) {
+    const displacementX = (distX / attractionRadius) * 20;
+    const displacementY = (distY / attractionRadius) * 20;
+
+    gsap.to(target, {
+      x: displacementX,
+      y: displacementY,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  } else {
+    gsap.to(target, { x: 0, y: 0, duration: 0.3, ease: "power2.out" });
+  }
+}
+
 onMounted(()=>{
   nextTick(()=>{
     revealOnScroll()
+
+    const targets = document.querySelectorAll(".toucher");
+    document.addEventListener("mousemove", function (e) {
+        Array.from(targets).forEach(target => {
+          animateTarget(target, e.clientX, e.clientY);
+        })
+    });
   })
 })
 </script>
@@ -47,7 +82,7 @@ onMounted(()=>{
     </section>
     <Scene data-scroll-in></Scene>
   </main>
-  <StudioFooter data-scroll-in></StudioFooter>
+  <StudioFooter></StudioFooter>
 </template>
 
 <style scoped>

@@ -187,33 +187,35 @@ function kagebunshinnojyutsu(evt){
 </script>
 
 <template>
-    <section class="relative py-4 outer" ref="heroBox">
-        <section class="overflow-hidden">
-            <div class="flex items-center" ref="heroScrollBox"
-            id="heroScrollBox">
-                <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0 transition-all
-                w-10/12"
-                :class="{'hero-prev': idx === 0,
-                'hero-active': idx === 1,
-                'hero-next': idx === 2}">
-                    <img :src="hero.desktop" class="hidden lg:block w-full" alt="">
-                    <img :src="hero.mobile" class="lg:hidden w-full" alt="">
+    <section>
+        <section class="relative py-4 outer" ref="heroBox">
+            <section class="overflow-hidden">
+                <div class="flex items-center" ref="heroScrollBox"
+                id="heroScrollBox">
+                    <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0 transition-all
+                    w-10/12"
+                    :class="{'hero-prev': idx === 0,
+                    'hero-active': idx === 1,
+                    'hero-next': idx === 2}">
+                        <img :src="hero.desktop" class="hidden lg:block w-full" alt="">
+                        <img :src="hero.mobile" class="lg:hidden w-full" alt="">
+                    </div>
                 </div>
+            </section>
+            <div class="hidden absolute lg:flex justify-between w-full top-1/2 z-10">
+                <img :src="PrevIcon" @click="prevHero" alt="" />
+                <img :src="NextIcon" @click="nextHero" alt="" />
+            </div>
+            <div id="smileIcon" class="absolute z-10" @mouseenter="kagebunshinnojyutsu">
+                <IconSmile class="w-6 lg:w-32 spin-3d"></IconSmile>
+                <IconSmile data-bunshin data-x="250" data-y="1000"></IconSmile>
+                <IconSmile data-bunshin data-x="-250" data-y="300"></IconSmile>
+                <IconSmile data-bunshin data-x="300" data-y="700"></IconSmile>
+            </div>
+            <div id="textIcon" class="absolute z-10">
+                <IconHeroText class="w-1/2 lg:w-fit"></IconHeroText>
             </div>
         </section>
-        <div class="hidden absolute lg:flex justify-between w-full top-1/2 z-10">
-            <img :src="PrevIcon" @click="prevHero" alt="" />
-            <img :src="NextIcon" @click="nextHero" alt="" />
-        </div>
-        <div id="smileIcon" class="absolute z-10" @mouseenter="kagebunshinnojyutsu">
-            <IconSmile class="w-6 lg:w-32 spin-3d"></IconSmile>
-            <IconSmile data-bunshin data-x="250" data-y="1000"></IconSmile>
-            <IconSmile data-bunshin data-x="-250" data-y="300"></IconSmile>
-            <IconSmile data-bunshin data-x="300" data-y="700"></IconSmile>
-        </div>
-        <div id="textIcon" class="absolute z-10">
-            <IconHeroText class="w-1/2 lg:w-fit"></IconHeroText>
-        </div>
     </section>
 </template>
 

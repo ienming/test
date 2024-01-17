@@ -7,10 +7,10 @@ import IconWeb from './icons/iconWeb.vue';
 </script>
 
 <template>
-    <div class="text-right w-full inline-flex justify-end" data-scroll-in="true">
-        <IconStarText class="w-1/2 lg:w-fit lg:absolute right-40 top-40"></IconStarText>
+    <div class="text-right w-full inline-flex justify-end" data-scroll-in>
+        <IconStarText class="w-1/2 lg:w-fit lg:absolute right-40 top-40 toucher"></IconStarText>
     </div>
-    <div class="inline-block" data-scroll-in="true">
+    <div class="inline-block" data-scroll-in>
         <div class="relative z-10">
             <img :src="ImageDesktop" alt="" class="hidden lg:block lg:w-75">
             <img :src="ImageMobile" alt="" class="w-full lg:hidden">
@@ -30,9 +30,8 @@ import IconWeb from './icons/iconWeb.vue';
             </div>
         </div>
     </div>
-    <div class="w-full pl-10 lg:pl-0" data-scroll-in="true">
-        <IconWeb class="w-1/4 lg:w-fit lg:absolute left-40 bottom-40
-        spin-3d"></IconWeb>
+    <div class="w-full pl-10 lg:pl-0" data-scroll-in>
+        <IconWeb class="w-1/4 lg:w-fit lg:absolute left-40 bottom-40 spin-3d toucher"></IconWeb>
     </div>
 </template>
 
@@ -52,7 +51,7 @@ import IconWeb from './icons/iconWeb.vue';
         content: '';
         display: block;
         position: absolute;
-        right: calc(-32px - var(--dot-size));
+        right: calc(-12px - var(--dot-size));
         top: 50%;
         width: var(--dot-size);
         height: var(--dot-size);
@@ -82,6 +81,9 @@ button {
         padding-left: var(--dist);
         > div{
             width: 100%;
+        }
+        h2::after{
+            right: calc(-32px - var(--dot-size));
         }
     }
 }

@@ -27,7 +27,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const sceneContainer = ref(null);
 onMounted(()=>{
     nextTick(()=>{
-        console.log(sceneContainer.value)
+        // console.log(sceneContainer.value)
         sceneContainer.value.appendChild(renderer.domElement);
 
         const logo = sceneContainer.value.querySelector(".logo")
@@ -71,24 +71,15 @@ controls.autoRotate = false;
 controls.target = new THREE.Vector3(0, 1, 0);
 controls.update();
 
-
-// Light
-const spotLight = new THREE.SpotLight(0xffffff,  3, 100, 0.22, 1);
-spotLight.position.set(0, 25, 0);
-spotLight.castShadow = true;
-spotLight.shadow.bias = -0.0001;
-scene.add(spotLight);
-
-
 // Real 3D object
 // Load a glTF resource
 const loader = new GLTFLoader()
-let mesh
+let mesh, material
 loader.load(modelPath, (gltf) => {
     mesh = gltf.scene;
     // console.log(mesh)
 
-    let material = new THREE.MeshMatcapMaterial({
+    material = new THREE.MeshMatcapMaterial({
         color: 0xD7FF66
     });
     mesh.traverse((child) => {
@@ -108,6 +99,25 @@ loader.load(modelPath, (gltf) => {
     console.error(error);
 });
 
+function mapTo01(value, originalMin, originalMax) {
+    const newMin = 0.225;
+    const newMax = 0.5;
+    const normalizedValue = (value - originalMin) / (originalMax - originalMin);
+    return normalizedValue * (newMax - newMin) + newMin;
+}
+
+function changeColor(evt){
+    const [mouseX, mouseY] = [evt.clientX, evt.clientY]
+    const [canvasW, canvasH] = [sceneContainer.value.clientWidth, sceneContainer.value.clientHeight]
+    const h = mapTo01(mouseX, 0, canvasW);
+    const l = (mouseY * 0.5)/canvasH;
+
+    const color = new THREE.Color();
+    color.setHSL(h, 1.0, l);
+
+    material.color.copy(color);
+}
+
 function animate() {
     if (mesh){
         mesh.rotation.x += 0.01;
@@ -123,15 +133,15 @@ animate();
 </script>
 
 <template>
-    <section ref="sceneContainer" class="relative overflow-hidden">
+    <section ref="sceneContainer" data-scroll-in class="relative overflow-hidden" @mousemove="changeColor">
         <h2 class="text absolute top-1/2 -translate-y-1/2 left-1/2 fz-h1 pointer-events-none whitespace-nowrap">
             <span>NATURE. ELEGANT. CLASSIC.</span>
             <span class="pl-72">NATURE. ELEGANT. CLASSIC.</span>
         </h2>
         <IconLogo class="logo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
-        <img :src="IconStone" class="spin-2d w-6 left-12 lg:left-30 lg:top-20" alt="" />
-        <img :src="IconStone" class="spin-2d w-12 top-12 right-20" alt="" />
-        <img :src="IconStone" class="spin-2d w-6 right-48 bottom-20" alt="" />
+        <img :src="IconStone" data-scroll-in class="spin-2d w-6 left-12 lg:left-30 lg:top-20" alt="" />
+        <img :src="IconStone" data-scroll-in class="spin-2d w-12 top-12 right-20" alt="" />
+        <img :src="IconStone" data-scroll-in class="spin-2d w-6 right-48 bottom-20" alt="" />
     </section>
 </template>
 

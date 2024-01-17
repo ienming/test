@@ -4,7 +4,7 @@ const text = ref("EXPLORE MORE")
 </script>
 
 <template>
-    <div>
+    <div class="toucher">
         <button class="pt-5 pb-6 px-3 lg:pt-6 lg:pb-7 lg:px-5 bg-no-repeat bg-contain fz-utility lg:text-base
         overflow-hidden">
             <span class="relative block fz-utility lg:text-base"
