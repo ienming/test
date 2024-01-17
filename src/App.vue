@@ -3,7 +3,7 @@ import StudioHeader from './components/StudioHeader.vue';
 import StudioFooter from './components/StudioFooter.vue';
 import HeroSwiper from './components/HeroSwiper.vue';
 import MarqueeSection from './components/MarqueeSection.vue';
-import FeatureItems from './components/FeatureItems.vue';
+import FeatureItems from './components/FeatureItems2.vue';
 import Swiper from './components/Swiper.vue';
 import Scene from './components/Scene.vue';
 
@@ -13,7 +13,7 @@ import { nextTick, onMounted } from 'vue';
 gsap.registerPlugin(ScrollTrigger);
 
 function revealOnScroll(){
-  const els = document.querySelectorAll('[data-scroll-in="true"]')
+  const els = document.querySelectorAll('[data-scroll-in]')
     // console.log(els)
     Array.from(els).forEach(el => {
       gsap.fromTo(el, {
@@ -39,15 +39,15 @@ onMounted(()=>{
 <template>
   <StudioHeader></StudioHeader>
   <main>
-    <HeroSwiper data-scroll-in="true"></HeroSwiper>
+    <HeroSwiper data-scroll-in></HeroSwiper>
     <FeatureItems></FeatureItems>
-    <MarqueeSection data-scroll-in="true"></MarqueeSection>
-    <section class="p-4 py-8 lg:py-40 flex flex-col justify-center items-center relative">
+    <MarqueeSection data-scroll-in></MarqueeSection>
+    <section class="p-4 py-8 lg:p-40 flex flex-col justify-center items-center relative">
       <Swiper></Swiper>
     </section>
-    <Scene data-scroll-in="true"></Scene>
+    <Scene data-scroll-in></Scene>
   </main>
-  <StudioFooter data-scroll-in="true"></StudioFooter>
+  <StudioFooter data-scroll-in></StudioFooter>
 </template>
 
 <style scoped>
