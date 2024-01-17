@@ -135,7 +135,8 @@ animate();
 
 <template>
     <section ref="sceneContainer" data-scroll-in class="relative overflow-x-hidden" @mousemove="changeColor">
-        <h2 class="text absolute top-1/2 -translate-y-1/2 left-1/2 fz-h1 pointer-events-none whitespace-nowrap">
+        <h2 class="text absolute top-1/2 -translate-y-1/2 left-1/2 fz-h1 pointer-events-none whitespace-nowrap"
+        style="z-index: -1;">
             <span>NATURE. ELEGANT. CLASSIC.</span>
             <span class="pl-28 lg:pl-72">NATURE. ELEGANT. CLASSIC.</span>
         </h2>
