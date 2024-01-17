@@ -18,7 +18,8 @@ camera.position.set(4, 5, 11);
 const renderer = new THREE.WebGLRenderer({
     alpha: true
 });
-renderer.setSize(window.innerWidth, window.innerHeight*0.7);
+const canvasH = window.innerWidth > 992 ? window.innerHeight*0.7:window.innerHeight*0.5
+renderer.setSize(window.innerWidth, canvasH);
 renderer.setPixelRatio(window.devicePixelRatio);
 
 renderer.shadowMap.enabled = true;
@@ -133,12 +134,12 @@ animate();
 </script>
 
 <template>
-    <section ref="sceneContainer" data-scroll-in class="relative overflow-hidden" @mousemove="changeColor">
+    <section ref="sceneContainer" data-scroll-in class="relative overflow-x-hidden" @mousemove="changeColor">
         <h2 class="text absolute top-1/2 -translate-y-1/2 left-1/2 fz-h1 pointer-events-none whitespace-nowrap">
             <span>NATURE. ELEGANT. CLASSIC.</span>
-            <span class="pl-72">NATURE. ELEGANT. CLASSIC.</span>
+            <span class="pl-28 lg:pl-72">NATURE. ELEGANT. CLASSIC.</span>
         </h2>
-        <IconLogo class="logo absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
+        <IconLogo class="logo w-full lg:w-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></IconLogo>
         <img :src="IconStone" data-scroll-in class="spin-2d w-6 left-12 lg:left-30 lg:top-20" alt="" />
         <img :src="IconStone" data-scroll-in class="spin-2d w-12 top-12 right-20" alt="" />
         <img :src="IconStone" data-scroll-in class="spin-2d w-6 right-48 bottom-20" alt="" />
