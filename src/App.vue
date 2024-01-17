@@ -11,9 +11,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { nextTick, onMounted } from 'vue';
 gsap.registerPlugin(ScrollTrigger);
-onMounted(()=>{
-  nextTick(()=>{
-    const els = document.querySelectorAll('[data-scroll-in="true"]')
+
+function revealOnScroll(){
+  const els = document.querySelectorAll('[data-scroll-in="true"]')
     // console.log(els)
     Array.from(els).forEach(el => {
       gsap.fromTo(el, {
@@ -27,6 +27,11 @@ onMounted(()=>{
         opacity: 1
       })
     })
+}
+
+onMounted(()=>{
+  nextTick(()=>{
+    revealOnScroll()
   })
 })
 </script>

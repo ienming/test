@@ -11,7 +11,7 @@ import Hero1 from '../assets/hero_1.png';
 import Hero1Mobile from '../assets/hero_1_mob.png';
 import Hero2 from '../assets/hero_2.png';
 import Hero2Mobile from '../assets/hero_2_mob.png';
-import SmileIcon from '../assets/icon_smile.svg';
+import IconSmile from "./icons/IconSmile.vue";
 import IconHeroText from "./icons/IconHeroText.vue";
 
 const heros = [
@@ -56,19 +56,19 @@ function handleGesture(touchstartX, touchstartY, touchendX, touchendY) {
 function scrollBox(){
     const dom = heroScrollBox.value
     gsap.to(dom, {
-            x: ()=>{
-                if (activeHero.value === 0){
-                    return (heros[activeHero.value].left)*-1
-                }else if (activeHero.value === heros.length - 1){
-                    let gap = window.innerWidth - heros[activeHero.value].width
-                    return (heros[activeHero.value].left)*-1+gap
-                }else{
-                    let gap = (window.innerWidth - heros[activeHero.value].width)/2
-                    return (heros[activeHero.value].left)*-1+gap
-                }
-
+        x: ()=>{
+            if (activeHero.value === 0){
+                return (heros[activeHero.value].left)*-1
+            }else if (activeHero.value === heros.length - 1){
+                let gap = window.innerWidth - heros[activeHero.value].width
+                return (heros[activeHero.value].left)*-1+gap
+            }else{
+                let gap = (window.innerWidth - heros[activeHero.value].width)/2
+                return (heros[activeHero.value].left)*-1+gap
             }
-        })
+
+        }
+    })
 }
 
 function initHero(){
@@ -120,11 +120,70 @@ onMounted(()=>{
             handleGesture(touchstartX, touchstartY, touchendX, touchendY)
         }, false); 
     })
+    window.addEventListener('resize', ()=>{
+        initHero()
+    })
 })
 
-window.addEventListener('resize', ()=>{
-    initHero()
-})
+function countCurve(t) {
+    return 1/2*t*t;
+}
+
+let finish = false
+function kagebunshinnojyutsu(evt){
+    if (!finish){
+        finish = true
+        const trigger = evt.currentTarget
+        const els = trigger.querySelectorAll('[data-bunshin]')
+        let tl = gsap.timeline()
+        tl.then(()=>{
+            finish = false
+        })
+        Array.from(els).forEach(el => {
+            const xVal = el.getAttribute('data-x')
+            const yVal = el.getAttribute('data-y')
+            let subTl = gsap.timeline()
+            tl.add(subTl, "<")
+            subTl.add(
+                gsap.to(el,{
+                    opacity: 1,
+                    x: 0,
+                    y: 0,
+                    onUpdate: function(){
+                        const progress = this.progress()-1;
+                        const curvedProgress = countCurve(progress); 
+                        const newX = progress * xVal;
+                        const newY = (curvedProgress * yVal)-50;
+                        gsap.set(el, { x: newX, y: newY });
+                    },
+                    ease: "power2.out",
+                })
+            )
+            subTl.add(
+                gsap.to(el, {
+                    opacity: 0,
+                    x: 0,
+                    y: 0,
+                    onUpdate: function(){
+                        const progress = this.progress();
+                        const curvedProgress = countCurve(progress); 
+                        const newX = progress * xVal;
+                        const newY = (curvedProgress * yVal)-50;
+                        gsap.set(el, { x: newX, y: newY });
+                    },
+                    ease: "power2.in",
+                }),
+                "-=0.05"
+            )
+            subTl.add(
+                gsap.to(el, {
+                    x: 0
+                }),
+                "-=0.01"
+            )
+        })
+    }else return
+}
 </script>
 
 <template>
@@ -134,9 +193,9 @@ window.addEventListener('resize', ()=>{
             id="heroScrollBox">
                 <div v-for="(hero, idx) of heros" :key="hero.id" class="shrink-0 transition-all
                 w-10/12"
-                :class="{'hero-prev': idx === activeHero - 1,
-                'hero-active': idx === activeHero,
-                'hero-next': idx === activeHero + 1,}">
+                :class="{'hero-prev': idx === 0,
+                'hero-active': idx === 1,
+                'hero-next': idx === 2}">
                     <img :src="hero.desktop" class="hidden lg:block w-full" alt="">
                     <img :src="hero.mobile" class="lg:hidden w-full" alt="">
                 </div>
@@ -146,8 +205,11 @@ window.addEventListener('resize', ()=>{
             <img :src="PrevIcon" @click="prevHero" alt="" />
             <img :src="NextIcon" @click="nextHero" alt="" />
         </div>
-        <div id="smileIcon" class="absolute w-6 lg:w-32 spin-3d">
-            <img :src="SmileIcon" alt="">
+        <div id="smileIcon" class="absolute z-10" @mouseenter="kagebunshinnojyutsu">
+            <IconSmile class="w-6 lg:w-32 spin-3d"></IconSmile>
+            <IconSmile data-bunshin data-x="250" data-y="1000"></IconSmile>
+            <IconSmile data-bunshin data-x="-250" data-y="300"></IconSmile>
+            <IconSmile data-bunshin data-x="300" data-y="700"></IconSmile>
         </div>
         <div id="textIcon" class="absolute z-10">
             <IconHeroText class="w-1/2 lg:w-fit"></IconHeroText>
@@ -156,6 +218,9 @@ window.addEventListener('resize', ()=>{
 </template>
 
 <style scoped>
+[data-bunshin]{
+    @apply pointer-events-none opacity-0 w-6 lg:w-12 absolute -top-1/3 left-1/3;
+}
 .hero-prev{
     & img{
         perspective-origin: left;
