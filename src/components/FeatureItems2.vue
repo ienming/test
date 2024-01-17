@@ -41,6 +41,7 @@ const items = [
             id: "2_2",
             class: `col-start-1 col-span-2 row-start-3 row-span-2
             lg:col-start-4 lg:row-start-2`,
+            imgClass: `lg:origin-bottom-left lg:scale-125`,
             intro: "2020 FW BLACK SUIT"
         },
         {
@@ -67,6 +68,7 @@ const items = [
             id: "3_3",
             class: `col-start-5 col-span-2 row-start-4 row-span-2
             lg:col-start-7 lg:row-start-3`,
+            imgClass: `lg:origin-bottom-left lg:scale-150`,
             intro: "GERDERLESS PAINT"
         }
     ]
@@ -85,7 +87,7 @@ onMounted(()=>{
         }else{
             currentIndex.value = 0
         }
-    }, 2000)
+    }, 3000)
 })
 
 onUnmounted(()=>{
@@ -112,7 +114,8 @@ onUnmounted(()=>{
             v-for="item of nowItems"
             :key="item.id"
             :class="item.class ? item.class : ''">
-                <img :src="getImgUrl(item.id)" alt="" class="w-full" />
+                <img :src="getImgUrl(item.id)" alt="" class="w-full"
+                :class="item.imgClass"/>
                 <p class="mt-2 text-center lg:text-left">{{ item.intro }}</p>
             </div>
         </transition-group>
@@ -126,14 +129,12 @@ section.grid {
     grid-gap: 8px;
     row-gap: 20px;
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: minmax(100px, max-content);
 }
 
 @media screen and (min-width: 992px) {
     section.grid {
         grid-gap: 20px;
         grid-template-columns: repeat(10, 1fr);
-        grid-template-rows: repeat(3, 300px);
     }
 }
 </style>
